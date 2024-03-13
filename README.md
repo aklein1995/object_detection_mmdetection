@@ -33,3 +33,31 @@ Navigate to the mmdetection submodule directory and install MMDetection in edita
 cd mmdetection
 pip install -v -e .
 ```
+
+## Non-Maximum Suppression (NMS) 
+It can be adjusted in two ways:
+1. Modify the score threshold in the configuration file, which is usually codified in the **test_cfg** section:
+```
+model = dict(
+    ...
+    test_cfg=dict(
+        nms_pre=1000,
+        score_thr=0.05,  # The score threshold
+        nms=dict(type='nms', iou_threshold=0.5),  # The NMS IoU threshold
+        max_per_img=100)
+    ...
+)
+```
+
+2. Filter the output based on the scores after the detections are made:
+```
+# Define your detection threshold
+detection_threshold = 0.5  # Example threshold
+
+# Assuming 'result' is the output from 'inference_detector' and contains the bounding boxes and scores
+for i, (boxes, scores) in enumerate(zip(result[0], result[1])):
+    # Filter out detections with scores below the threshold
+    indices = scores > detection_threshold
+    filtered_boxes = boxes[indices]
+    filtered_scores = scores[indices]
+```
