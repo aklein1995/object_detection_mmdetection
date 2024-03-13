@@ -36,7 +36,7 @@ pip install -v -e .
 
 ## Non-Maximum Suppression (NMS) 
 It can be adjusted in two ways:
-1. Modify the score threshold in the configuration file, which is usually codified in the **test_cfg** section:
+1. Modify the score threshold in the configuration file, which is usually codified in the **test_cfg** [section](https://github.com/aklein1995/mmdetection/blob/cfd5d3a985b0249de009b67d04f37263e11cdf3d/configs/_base_/models/faster-rcnn_r50_fpn.py):
 ```
 model = dict(
     ...
